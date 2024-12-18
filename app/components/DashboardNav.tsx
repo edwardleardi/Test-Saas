@@ -8,7 +8,6 @@ import { navItems } from "./UserNav";
 
 export function DashboardNav() {
   const pathname = usePathname();
-  console.log(pathname);
   return (
   <nav className="grid items-start gap-2">
     {navItems.map((item, index) => (
