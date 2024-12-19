@@ -27,10 +27,14 @@ async function getData({ userId, noteId }: { userId: string; noteId: string }) {
 }
 
 
-export default async function DynamicRoute({ params }: { params: { id: string } }) {
+export default async function DynamicRoute({ params }: { params: Promise<{ id: string }> }) {
+  // Await the params promise to access the id property
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
+
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const data = await getData({ userId: user?.id as string, noteId: params.id });
+  const data = await getData({ userId: user?.id as string, noteId: id });
 
   async function postData(formData: FormData) {
     "use server";
