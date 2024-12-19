@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       process.env.STRIPE_WEBHOOK_SECRET as string
     );
     console.log("Stripe webhook event constructed:", event.type);
-  } catch (error: unknown) {
+  } catch {
     return new Response("Webhook error", { status: 400 });
   }
 
